@@ -30,25 +30,30 @@ public partial class EditContactPage : ContentPage
 			// If the contact is not null, assign the values of the contact to the entry fields
 			if (contact != null)
 			{
-                entryName.Text = contact.Name;
-				entryEmail.Text = contact.Email;
-				entryPhone.Text = contact.Phone;
-				entryAddress.Text = contact.Address;
+                contactCtrl.Name = contact.Name;
+				contactCtrl.Email = contact.Email;
+				contactCtrl.Phone = contact.Phone;
+				contactCtrl.Address = contact.Address;
             }
 		}
 	}
 
     private void BtnUpdate_Clicked(object sender, EventArgs e)
     {
-		contact.Name = entryName.Text;
-		contact.Email = entryEmail.Text;
-		contact.Phone = entryPhone.Text;
-		contact.Address = entryAddress.Text;
+		contact.Name = contactCtrl.Name;
+		contact.Email = contactCtrl.Email;
+		contact.Phone = contactCtrl.Phone;
+		contact.Address = contactCtrl.Address;
 
-		// Update the contact in the repository
-		ContactRepository.UpdateContact(contact.ContactId, contact);
+        // Update the contact in the repository
+        ContactRepository.UpdateContact(contact.ContactId, contact);
 
 		// Navigate back to the previous page
         Shell.Current.GoToAsync($"..");
+    }
+
+	private void ContactCtrl_OnError(object sender, string e)
+	{
+        DisplayAlert("Error", e, "OK");
     }
 }

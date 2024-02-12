@@ -35,4 +35,9 @@ public partial class ContactsPage : ContentPage
     {
 		listContacts.SelectedItem = null;
     }
+
+    private void BtnAdd_Clicked(object sender, EventArgs e)
+    {
+		Shell.Current.GoToAsync($"{nameof(AddContactPage)}");
+    }
 }

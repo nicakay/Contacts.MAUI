@@ -3,22 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Contacts.MAUI.Views.ContactsPage"
              Title="Contacts">
-    <ListView 
-        x:Name="listContacts" 
-        BackgroundColor="Transparent"
-        SeparatorColor="MediumPurple"
-        RowHeight="65"
-        ItemSelected="listContacts_ItemSelected"
-        ItemTapped="listContacts_ItemTapped"
-        >
-        
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell 
+
+    <Grid RowDefinitions="*, 50"
+          ColumnDefinitions="*">
+
+        <ListView 
+            Grid.Row="0"
+            Grid.Column="0"
+            x:Name="listContacts" 
+            BackgroundColor="Transparent"
+            SeparatorColor="MediumPurple"
+            RowHeight="65"
+            ItemSelected="listContacts_ItemSelected"
+            ItemTapped="listContacts_ItemTapped"
+            >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
                     Text="{Binding Name}"
                     Detail="{Binding Email}"></TextCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        
-    </ListView>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            x:Name="BtnAdd"
+            Text="Add Contact"
+            Clicked="BtnAdd_Clicked">
+
+        </Button>
+
+    </Grid>
+
+
 </ContentPage>

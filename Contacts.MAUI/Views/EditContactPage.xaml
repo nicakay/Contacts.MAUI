@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:Contacts.MAUI.Views.Controls"
              x:Class="Contacts.MAUI.Views.EditContactPage"
              Title="Edit Contact">
 
-    <VerticalStackLayout Spacing="10" Margin="20, 20, 20, 0">
+    <controls:ContactControl x:Name="contactCtrl"
+                             OnSave="BtnUpdate_Clicked"
+                             OnCancel="BtnCancel_Clicked"
+                             OnError="ContactCtrl_OnError"></controls:ContactControl>
 
-        <Border Padding="10, 2, 10, 2">
-            <HorizontalStackLayout>
-                <Label Text="Name" VerticalOptions="Center" WidthRequest="60" />
-                <Entry x:Name="entryName" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-        </Border>
-
-        <Border Padding="10, 2, 10, 2">
-            <HorizontalStackLayout>
-                <Label Text="Email" VerticalOptions="Center" WidthRequest="60" />
-                <Entry x:Name="entryEmail" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-        </Border>
-
-        <Border Padding="10, 2, 10, 2">
-            <HorizontalStackLayout>
-                <Label Text="Phone" VerticalOptions="Center" WidthRequest="60" />
-                <Entry x:Name="entryPhone" VerticalOptions="Center" MinimumWidthRequest="250" />
-            </HorizontalStackLayout>
-        </Border>
-
-        <Border Padding="10, 2, 10, 2">
-            <HorizontalStackLayout>
-                <Label Text="Address" VerticalOptions="Center" WidthRequest="60" />
-                <Entry x:Name="entryAddress" VerticalOptions="Center" MinimumWidthRequest="250" />
-            </HorizontalStackLayout>
-        </Border>
-
-        <Button x:Name="BtnUpdate" Text="Update" Clicked="BtnUpdate_Clicked"></Button>
-
-        <Button x:Name="BtnCancel" Text="Cancel" Clicked="BtnCancel_Clicked"></Button>
-
-    </VerticalStackLayout>
-    
 </ContentPage>
