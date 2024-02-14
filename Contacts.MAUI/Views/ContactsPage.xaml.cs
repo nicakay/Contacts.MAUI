@@ -15,10 +15,7 @@ public partial class ContactsPage : ContentPage
 	{
         base.OnAppearing();
 
-		// Set the ItemsSource of the listContacts to the list of contacts from the repository using an ObservableCollection
-		var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
-
-		listContacts.ItemsSource = contacts;
+        LoadContacts();
     }
 
     private async void listContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -39,5 +36,25 @@ public partial class ContactsPage : ContentPage
     private void BtnAdd_Clicked(object sender, EventArgs e)
     {
 		Shell.Current.GoToAsync($"{nameof(AddContactPage)}");
+    }
+
+    private void Delete_Clicked(object sender, EventArgs e)
+    {
+		// Get the MenuItem that was clicked
+		var menuItem = sender as MenuItem;
+		// Get the Contact that was clicked
+		var contact = menuItem.CommandParameter as Contact;
+
+        // Remove the contact from the list
+        ContactRepository.DeleteContact(contact.ContactId);
+
+        LoadContacts();
+    }
+
+	private void LoadContacts()
+	{
+        // Set the ItemsSource of the listContacts to the list of contacts from the repository using an ObservableCollection
+        var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
+        listContacts.ItemsSource = contacts;
     }
 }

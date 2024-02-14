@@ -64,5 +64,14 @@
             contact.ContactId = maxId + 1;
             _contacts.Add(contact);
         }
+
+        public static void DeleteContact(int contactId)
+        {
+            var contactToDelete = _contacts.FirstOrDefault(c => c.ContactId == contactId);
+            if (contactToDelete != null)
+            {
+                _contacts.Remove(contactToDelete);
+            }
+        }
     }
 }
