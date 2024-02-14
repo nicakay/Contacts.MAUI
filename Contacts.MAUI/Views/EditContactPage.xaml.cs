@@ -52,8 +52,8 @@ public partial class EditContactPage : ContentPage
         Shell.Current.GoToAsync($"..");
     }
 
-	private void ContactCtrl_OnError(object sender, string e)
-	{
+    private void ContactCtrl_OnError(object sender, string e)
+    {
         DisplayAlert("Error", e, "OK");
     }
 }

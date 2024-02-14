@@ -1,4 +1,5 @@
 using Contacts.MAUI.Models;
+using Microsoft.Maui.ApplicationModel.Communication;
 using System.Collections.ObjectModel;
 using Contact = Contacts.MAUI.Models.Contact;
 
@@ -15,10 +16,13 @@ public partial class ContactsPage : ContentPage
 	{
         base.OnAppearing();
 
+        // Clear the search bar
+        Search.Text = string.Empty;
+
         LoadContacts();
     }
 
-    private async void listContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private async void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
 		// If the item is not selected, the SelectedItem property will be null
 		if (e.SelectedItem != null)
@@ -28,7 +32,7 @@ public partial class ContactsPage : ContentPage
 		}
     }
 
-    private void listContacts_ItemTapped(object sender, ItemTappedEventArgs e)
+    private void ListContacts_ItemTapped(object sender, ItemTappedEventArgs e)
     {
 		listContacts.SelectedItem = null;
     }
@@ -55,6 +59,13 @@ public partial class ContactsPage : ContentPage
 	{
         // Set the ItemsSource of the listContacts to the list of contacts from the repository using an ObservableCollection
         var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
-        listContacts.ItemsSource = contacts;
+        listContacts.ItemsSource = contacts.OrderBy(c => c.Name);
     }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var contactsToFilter = new ObservableCollection<Contact>(ContactRepository.SearchContacts(((SearchBar)sender).Text));
+        listContacts.ItemsSource = contactsToFilter.OrderBy(c => c.Name);
+    }
+
 }

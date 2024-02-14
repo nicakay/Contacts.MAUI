@@ -9,7 +9,7 @@ public partial class AddContactPage : ContentPage
 		InitializeComponent();
 	}
 
-    private void contactCtrl_OnSave(object sender, EventArgs e)
+    private void ContactCtrl_OnSave(object sender, EventArgs e)
     {
         ContactRepository.AddContact(new Models.Contact
         {
@@ -22,12 +22,12 @@ public partial class AddContactPage : ContentPage
         Shell.Current.GoToAsync($"//{nameof(ContactsPage)}");
     }
 
-    private void contactCtrl_OnCancel(object sender, EventArgs e)
+    private void ContactCtrl_OnCancel(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync($"//{nameof(ContactsPage)}");
     }
 
-    private void contactCtrl_OnError(object sender, string e)
+    private void ContactCtrl_OnError(object sender, string e)
     {
         DisplayAlert("Error", e, "OK");
     }

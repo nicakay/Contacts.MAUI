@@ -6,8 +6,8 @@
              Title="Add Contact">
 
     <controls:ContactControl x:Name="contactCtrl"
-                             OnSave="contactCtrl_OnSave"
-                             OnCancel="contactCtrl_OnCancel"
-                             OnError="contactCtrl_OnError"></controls:ContactControl>
+                             OnSave="ContactCtrl_OnSave"
+                             OnCancel="ContactCtrl_OnCancel"
+                             OnError="ContactCtrl_OnError"></controls:ContactControl>
 
 </ContentPage>

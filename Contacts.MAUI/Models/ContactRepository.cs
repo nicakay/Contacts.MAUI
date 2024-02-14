@@ -3,21 +3,24 @@
     // Static repository class that contains a list of contacts
     public static class ContactRepository
     {
-        public static List<Contact> _contacts = new()
+        private static readonly List<Contact> contacts = new()
         {
             new Contact { ContactId = 1, Name = "John Doe", Email = "johndoe@gmail.com"},
             new Contact { ContactId = 2, Name = "Jane Doe", Email = "janedoe@gmail.com"},
-            new Contact { ContactId = 3, Name = "John Smith", Email = "johnsmith@gmail.com"},
-            new Contact { ContactId = 4, Name = "Jane Smith", Email = "janesmith@gmail.com"},
-            new Contact { ContactId = 5, Name = "John Johnson", Email = "johnjohnson@gmail.com"},
-            new Contact { ContactId = 6, Name = "Jane Johnson", Email = "janejohnson@gmail.com"},
-            new Contact { ContactId = 7, Name = "John Williams", Email = "johnwilliams@gmail.com"},
-            new Contact { ContactId = 8, Name = "Jane Williams", Email = "janewilliams@gmail.com"},
-            new Contact { ContactId = 9, Name = "John Brown", Email = "johnbrown@gmail.com"},
-            new Contact { ContactId = 10, Name = "Jane Brown", Email = "janebrown@gmail.com"},
-            new Contact { ContactId = 11, Name = "John Davis", Email = "johndavis@gmail.com"},
-            new Contact { ContactId = 12, Name = "Jane Davis", Email = "janedavis@gmail.com"}
+            new Contact { ContactId = 3, Name = "Mary Smith", Email = "marysmith@gmail.com"},
+            new Contact { ContactId = 4, Name = "Terry Smith", Email = "terrysmith@gmail.com"},
+            new Contact { ContactId = 5, Name = "Betty Johnson", Email = "bettyjohnson@gmail.com"},
+            new Contact { ContactId = 6, Name = "Vince Johnson", Email = "vincejohnson@gmail.com"},
+            new Contact { ContactId = 7, Name = "David Williams", Email = "davidwilliams@gmail.com"},
+            new Contact { ContactId = 8, Name = "Alice Williams", Email = "alicewilliams@gmail.com"},
+            new Contact { ContactId = 9, Name = "Peggy Brown", Email = "peggybrown@gmail.com"},
+            new Contact { ContactId = 10, Name = "Michael Brown", Email = "michaelbrown@gmail.com"},
+            new Contact { ContactId = 11, Name = "Steven Davis", Email = "stevendavis@gmail.com"},
+            new Contact { ContactId = 12, Name = "Elen Davis", Email = "elendavis@gmail.com"},
+            new Contact { ContactId = 13, Name = "Linda Miller", Email = "lindamiller@gmail.com"},
+            new Contact { ContactId = 14, Name = "Tom Miller", Email = "tommiller@gmail.com"}
         };
+        public static List<Contact> _contacts = contacts;
 
         public static List<Contact> GetContacts()
         {
@@ -72,6 +75,28 @@
             {
                 _contacts.Remove(contactToDelete);
             }
+        }
+
+        public static List<Contact> SearchContacts(string searchText)
+        {
+            var contacts = _contacts.Where(c => !string.IsNullOrWhiteSpace(c.Name) && c.Name.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))?.ToList();
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(c => !string.IsNullOrWhiteSpace(c.Email) && c.Email.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(c => !string.IsNullOrWhiteSpace(c.Phone) && c.Phone.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(c => !string.IsNullOrWhiteSpace(c.Address) && c.Address.StartsWith(searchText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            return contacts;
         }
     }
 }
